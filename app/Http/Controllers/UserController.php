@@ -33,6 +33,9 @@ class UserController extends Controller
             'password' => $validateUser['password']
         ]);
 
-        return redirect()->route('signup')->with('success', "{$validateUser['name']} successfully registered");
+        return response()->json([
+            'status' => 'success',
+            'message' => "{$validateUser['name']} successfully registered"
+        ]);
     }
 }

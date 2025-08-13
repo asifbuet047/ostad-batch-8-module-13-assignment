@@ -21,6 +21,7 @@ signup_form.addEventListener("submit", async (event) => {
     const error = document.getElementById("error-message");
 
     if (response.ok) {
+        console.log(data);
         success.textContent = data.message;
         success.classList.remove("d-none");
         signup_form.reset();
