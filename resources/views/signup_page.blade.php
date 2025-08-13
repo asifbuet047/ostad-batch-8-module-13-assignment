@@ -46,6 +46,13 @@
                         <h3 class="fw-bold">Create an Account</h3>
                     </div>
                     <div class="card-body">
+                        <div id="success-message" class="alert alert-success d-none"></div>
+                        <div id="error-message" class="alert alert-danger d-none"></div>
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <form id="signup_form" action="/signup" method="POST">
                             @csrf
 
@@ -75,8 +82,8 @@
                             <!--Confirm Password -->
                             <div class="mb-3">
                                 <label for="password_confirmation" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="password_confirmation" name="password"
-                                    placeholder="********" required>
+                                <input type="password" class="form-control" id="password_confirmation"
+                                    name="password_confirmation" placeholder="********" required>
                                 @error('password_confirmation')
                                     <div style="color: red;">{{ $message }}</div>
                                 @enderror
