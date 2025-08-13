@@ -56,6 +56,9 @@
                                 <label for="email" class="form-label">Email</label>
                                 <input type="text" class="form-control" id="email" name="email"
                                     placeholder="asif12@gmail.com" required>
+                                @error('email')
+                                    <div style="color: red;">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <!-- Password -->

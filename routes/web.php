@@ -4,12 +4,14 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get("/", fn() => view('dashboard'));
+Route::get("/", [UserController::class, 'showDashboard'])->name('dashboard');
 
-Route::get('/signup', [UserController::class, 'viewRegistrationForm']);
+Route::get('/signup', [UserController::class, 'viewRegistrationForm'])->name("signup");
 
 Route::post('/signup', [UserController::class, 'storeUserIntoDB']);
 
-Route::get('/login', [UserController::class, 'viewLoginPage']);
+Route::get('/login', [UserController::class, 'viewLoginPage'])->name('login');
 
 Route::post('/login', [UserController::class, 'loginUser']);
+
+Route::get('/logout', [UserController::class, 'logoutUser']);

@@ -5,18 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function viewRegistrationForm(Request $req)
     {
+        if (Cookie::get('user_token')) {
+            return redirect()->route('dashboard');
+        }
         return view('signup_page');
     }
 
     public function viewLoginPage(Request $req)
     {
-        return view('/login_page');
+        if (Cookie::get('user_token')) {
+            return redirect()->route('dashboard');
+        }
+        return view('login_page');
     }
 
     public function storeUserIntoDB(Request $req)
@@ -35,11 +42,13 @@ class UserController extends Controller
             'password.confirmed' => 'Password confirmation does not match.',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $validateUser['name'],
             'email' => $validateUser['email'],
-            'password' => $validateUser['password']
+            'password' => Hash::make($validateUser['password']),
         ]);
+
+        Cookie::queue('user_token', $user->id, 10);
 
         return response()->json([
             'status' => 'success',
@@ -64,16 +73,32 @@ class UserController extends Controller
         if (! $user || ! Hash::check($credentials['password'], $user->password)) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Invalid email or password.',
+                'message' => 'Login unsuccessful.',
             ], 401);
         }
 
-        Auth::login($user);
+        Cookie::queue('user_token', $user->id, 10);
 
         return response()->json([
             'status' => 'success',
             'message' => 'Login successful.',
             'user' => $user
         ]);
+    }
+
+    public function logoutUser(Request $req)
+    {
+        Cookie::queue(Cookie::forget('user_token'));
+        return redirect()->route('login');
+    }
+
+    public function showDashboard()
+    {
+        $userId = Cookie::get('user_token');
+        if (!$userId) {
+            return redirect()->route('login');
+        }
+        $user = User::find($userId);
+        return view('dashboard', compact('user'));
     }
 }

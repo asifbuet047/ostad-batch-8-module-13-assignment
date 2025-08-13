@@ -28,6 +28,7 @@ signup_form.addEventListener("submit", async (event) => {
     if (response.ok) {
         success.textContent = data.message;
         success.classList.remove("d-none");
+        error.classList.add("d-none");
         nameField.disabled = true;
         emailField.disabled = true;
         passwordField.disabled = true;

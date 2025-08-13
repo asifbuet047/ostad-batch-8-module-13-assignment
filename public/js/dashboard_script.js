@@ -9,6 +9,10 @@ const customModalTitle = document.getElementById("custom-modal-title");
 const customModalBody = document.getElementById("custom-modal-body");
 const customModalButton = document.getElementById("custom-modal-button");
 const taskCount = document.getElementById("task-count");
+const user_name = document.getElementById("user_name");
+const logout_button = document.getElementById("logout_button");
+const login_button = document.getElementById("login_button");
+
 // Function to render todos
 function showAllTasks() {
     // Clear previous list

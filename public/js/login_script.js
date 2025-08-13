@@ -16,7 +16,6 @@ login_form.addEventListener("submit", async (event) => {
     });
 
     const data = await response.json();
-    console.log(data);
 
     const success = document.getElementById("success-message");
     const error = document.getElementById("error-message");
@@ -27,6 +26,7 @@ login_form.addEventListener("submit", async (event) => {
     if (response.ok) {
         success.textContent = data.message;
         success.classList.remove("d-none");
+        error.classList.add("d-none");
         emailField.disabled = true;
         passwordField.disabled = true;
         login_button.textContent = "Go to Your dashboard";
@@ -34,14 +34,18 @@ login_form.addEventListener("submit", async (event) => {
             window.location.href = "/";
         });
     } else {
-        console.log(data);
-        let errors = data.errors;
-        let html = "<ul>";
-        for (const key in errors) {
-            html += `<li>${errors[key][0]}</li>`;
+        if (data?.status === "error") {
+            error.classList.remove("d-none");
+            error.innerText = data.message;
+        } else {
+            let errors = data.errors;
+            let html = "<ul>";
+            for (const key in errors) {
+                html += `<li>${errors[key][0]}</li>`;
+            }
+            html += "</ul>";
+            error.innerHTML = html;
+            error.classList.remove("d-none");
         }
-        html += "</ul>";
-        error.innerHTML = html;
-        error.classList.remove("d-none");
     }
 });
