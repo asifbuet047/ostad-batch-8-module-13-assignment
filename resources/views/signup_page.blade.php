@@ -61,6 +61,9 @@
                                 <label for="email" class="form-label">Email</label>
                                 <input type="text" class="form-control" id="email" name="email"
                                     placeholder="asif12@gmail.com" required>
+                                @error('password')
+                                    <div style="color: red;">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <!-- Password -->
@@ -71,9 +74,12 @@
                             </div>
                             <!--Confirm Password -->
                             <div class="mb-3">
-                                <label for="password_confirm" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="password_confirm" name="password"
+                                <label for="password_confirmation" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="password_confirmation" name="password"
                                     placeholder="********" required>
+                                @error('password_confirmation')
+                                    <div style="color: red;">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <!-- Submit -->
@@ -89,7 +95,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset("js/signup_script.js") }}"></script>
+    <script src="{{ asset('js/signup_script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
