@@ -46,7 +46,7 @@
                         <h3 class="fw-bold">Create an Account</h3>
                     </div>
                     <div class="card-body">
-                        <form action="/signup" method="POST">
+                        <form id="signup_form" action="/signup" method="POST">
                             @csrf
 
                             <!-- Name -->
@@ -69,6 +69,12 @@
                                 <input type="password" class="form-control" id="password" name="password"
                                     placeholder="********" required>
                             </div>
+                            <!--Confirm Password -->
+                            <div class="mb-3">
+                                <label for="password_confirm" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="password_confirm" name="password"
+                                    placeholder="********" required>
+                            </div>
 
                             <!-- Submit -->
                             <div class="d-grid">
@@ -83,6 +89,7 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset("js/signup_script.js") }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
