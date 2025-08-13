@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", fn() => view('dashboard'));
 
-Route::get('/signup', [UserController::class, 'viewRegistrationForm'])->name('signup');
+Route::get('/signup', [UserController::class, 'viewRegistrationForm']);
 
-Route::post('/signup', [UserController::class, 'storeUserIntoDB'])->name('user.store');
+Route::post('/signup', [UserController::class, 'storeUserIntoDB']);
 
-Route::get('/login', fn() => view('login_page'));
+Route::get('/login', [UserController::class, 'viewLoginPage']);
+
+Route::post('/login', [UserController::class, 'loginUser']);

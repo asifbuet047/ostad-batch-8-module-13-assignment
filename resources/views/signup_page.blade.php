@@ -48,11 +48,6 @@
                     <div class="card-body">
                         <div id="success-message" class="alert alert-success d-none"></div>
                         <div id="error-message" class="alert alert-danger d-none"></div>
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                        @endif
                         <form id="signup_form" action="/signup" method="POST">
                             @csrf
 
@@ -91,7 +86,8 @@
 
                             <!-- Submit -->
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-custom text-white fw-bold">Sign Up</button>
+                                <button type="submit" class="btn btn-custom text-white fw-bold" id="signup_button">Sign
+                                    Up</button>
                             </div>
                         </form>
                     </div>

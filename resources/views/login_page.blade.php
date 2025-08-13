@@ -46,7 +46,9 @@
                         <h3 class="fw-bold">Log into Your Account</h3>
                     </div>
                     <div class="card-body">
-                        <form action="/login" method="POST">
+                        <div id="success-message" class="alert alert-success d-none"></div>
+                        <div id="error-message" class="alert alert-danger d-none"></div>
+                        <form id="login_form" action="/login" method="POST">
                             @csrf
 
                             <!-- Email -->
@@ -65,7 +67,8 @@
 
                             <!-- Submit -->
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-custom text-white fw-bold">Sign Up</button>
+                                <button id="login_button" type="submit" class="btn btn-custom text-white fw-bold">Log
+                                    In</button>
                             </div>
                         </form>
                     </div>
@@ -76,6 +79,7 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('js/login_script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
